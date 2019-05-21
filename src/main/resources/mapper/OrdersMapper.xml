@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.mapper.OrdersMapper">
+  <resultMap id="BaseResultMap" type="com.manager.entity.Orders">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="import_no" jdbcType="VARCHAR" property="importNo" />
+    <result column="task_no" jdbcType="VARCHAR" property="taskNo" />
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+    <result column="taobao" jdbcType="VARCHAR" property="taobao" />
+    <result column="en_price" jdbcType="INTEGER" property="enPrice" />
+    <result column="real_price" jdbcType="INTEGER" property="realPrice" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="sign_status" jdbcType="TINYINT" property="signStatus" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+
+  <insert id="insertInfoBatch" parameterType="java.util.List">
+    insert into orders (import_no, task_no,order_no, shop, taobao,en_price, real_price, status,
+     sign_status, end_time)
+    values
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.importNo}, #{item.taskNo}, #{item.orderNo},#{item.shop}, #{item.taobao},
+      #{item.enPrice}, #{item.realPrice},#{item.status}, #{item.signStatus},
+      #{item.endTime})
+    </foreach>
+  </insert>
+</mapper>
